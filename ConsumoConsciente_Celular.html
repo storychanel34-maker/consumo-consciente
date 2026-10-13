@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#542b7d">
+  <title>Consumo Consciente | Prototipo</title>
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap');
+:root{--purple:#6d3ba5;--deep:#4b2478;--pale:#f4effb;--bg:#f8f6fb;--ink:#29223a;--muted:#777084;--line:#e9e2f0;--white:#fff}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:'DM Sans',Arial,sans-serif;font-size:14px;line-height:1.55}
+.hero{display:flex;align-items:center;gap:15px;padding:26px max(20px,calc((100% - 980px)/2));background:linear-gradient(120deg,#47216e,#7950a8);color:white}
+.brand-mark{display:grid;place-items:center;width:54px;height:54px;flex:0 0 54px;border:1px solid #ffffff70;border-radius:17px;background:#ffffff1b;font-family:Manrope,sans-serif;font-weight:800;font-size:18px}
+.eyebrow{margin:0 0 4px;font-size:10px;letter-spacing:1.4px;font-weight:700;opacity:.82}.hero h1{margin:0;font:800 clamp(23px,4vw,32px)/1.15 Manrope,Arial,sans-serif;letter-spacing:-.8px}.hero h1 span{color:#e6d2ff}.hero-sub{margin:7px 0 0;font-size:13px;opacity:.9}
+main{width:min(980px,calc(100% - 28px));margin:20px auto 35px}.intro{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:22px 24px;border:1px solid var(--line);border-radius:20px;background:white;box-shadow:0 8px 26px #2d17420a}.intro h2{margin:11px 0 7px;font:800 clamp(20px,3vw,27px)/1.25 Manrope,Arial,sans-serif;letter-spacing:-.5px}.intro p{max-width:640px;margin:0;color:var(--muted);font-size:13px}.tag{display:inline-block;padding:5px 9px;border-radius:7px;background:var(--pale);color:var(--purple);font-size:9px;font-weight:800;letter-spacing:.8px}.intro-icon{display:grid;place-items:center;width:70px;height:70px;flex:0 0 70px;border-radius:23px;background:var(--pale);color:var(--purple);font-size:42px}
+.tabs{display:flex;gap:7px;margin:16px 0;padding:5px;border:1px solid var(--line);border-radius:15px;background:#fff;overflow-x:auto}.tab{display:flex;align-items:center;gap:8px;flex:1;justify-content:center;min-width:max-content;padding:11px 13px;border:0;border-radius:10px;background:transparent;color:#655c72;font:600 12px 'DM Sans',Arial,sans-serif;cursor:pointer}.tab span{display:grid;place-items:center;width:22px;height:22px;border-radius:7px;background:#f0ebf5;color:var(--purple);font-size:10px}.tab.active{background:var(--purple);color:#fff}.tab.active span{background:#ffffff26;color:white}
+.view{display:none;padding:23px;border:1px solid var(--line);border-radius:20px;background:white;box-shadow:0 8px 26px #2d174208}.view.active{display:block}.section-title{display:flex;align-items:flex-start;gap:12px;margin-bottom:20px}.step{display:grid;place-items:center;width:38px;height:38px;flex:0 0 38px;border-radius:12px;background:var(--pale);color:var(--purple);font:800 13px Manrope,sans-serif}.section-title h2{margin:0;font:800 20px/1.3 Manrope,Arial,sans-serif;letter-spacing:-.3px}.section-title p{margin:5px 0 0;color:var(--muted);font-size:12px}
+.scanner-card{position:relative;display:grid;min-height:245px;place-items:center;overflow:hidden;border:1px dashed #cbb8df;border-radius:17px;background:linear-gradient(145deg,#fcfaff,#f6f0fc)}#reader{width:100%;max-width:500px}#reader video{width:100%!important;object-fit:cover;border-radius:14px}.camera-placeholder{text-align:center;padding:25px 16px;color:var(--muted)}.scan-frame{display:grid;place-items:center;width:82px;height:82px;margin:0 auto 14px;border:2px solid #bca1d8;border-radius:17px;color:var(--purple);font-size:49px}.camera-placeholder strong{color:var(--ink);font-size:14px}.camera-placeholder p{margin:5px 0;font-size:12px}
+button{font:700 12px 'DM Sans',Arial,sans-serif;cursor:pointer;transition:background .15s,transform .15s}button:focus-visible{outline:3px solid #cdb3e8;outline-offset:3px}.primary,.secondary{padding:12px 16px;border:0;border-radius:11px}.primary{background:var(--purple);color:#fff}.primary:hover{background:var(--deep)}.secondary{border:1px solid #e4d7f1;background:#f4effb;color:var(--purple)}.secondary:hover{background:#eae0f7}.actions{display:flex;gap:9px;margin-top:12px}.actions button{flex:1}.status{margin:11px 0;color:var(--muted);font-size:12px}.status.error{color:#b42345}.manual{margin-top:16px;padding:13px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}summary{color:var(--purple);font-weight:700;font-size:12px;cursor:pointer}.manual p,.tip p,.science-note p,.caution p{margin:6px 0 0;color:var(--muted);font-size:12px}.tip,.science-note{margin-top:17px;padding:14px 16px;border-radius:13px;background:#f8f4fc;border:1px solid #eee5f7}.tip strong,.science-note strong{font-size:12px;color:var(--deep)}
+.empty-state{padding:34px 20px;text-align:center;border:1px dashed var(--line);border-radius:16px;background:#fcfbfe}.empty-state>div{font-size:32px;color:var(--purple)}.empty-state h3{margin:9px 0 4px;font:700 16px Manrope,sans-serif}.empty-state p{margin:0 0 12px;color:var(--muted);font-size:12px}.food-heading{display:flex;gap:13px;align-items:center;padding:15px;border-radius:15px;background:#faf7fd}.food-icon{display:grid;place-items:center;width:48px;height:48px;flex:0 0 48px;border-radius:14px;background:#eaddf7;color:var(--purple);font-size:27px}.food-heading h3{margin:7px 0 1px;font:800 17px Manrope,sans-serif}.food-heading p{margin:0;font-size:11px;overflow-wrap:anywhere}.data-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:14px 0 20px}.data-cell{min-width:0;padding:12px;border:1px solid var(--line);border-radius:12px}.data-cell span{display:block;margin-bottom:4px;color:var(--muted);font-size:10px}.data-cell strong{font-size:12px;overflow-wrap:anywhere}.subhead{margin:0 0 3px;font:700 15px Manrope,sans-serif}.muted{color:var(--muted)}.small{font-size:11px}.nutrition{margin-top:13px}.nutrition>div{display:flex;justify-content:space-between;gap:15px;padding:11px 2px;border-bottom:1px solid #f0ebf5;font-size:12px}.nutrition strong{text-align:right;overflow-wrap:anywhere}
+.color-options{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin:18px 0}.color-card{display:flex;flex-direction:column;align-items:flex-start;gap:4px;padding:12px;border:1px solid var(--line);border-radius:13px}.color-card strong{font-size:12px}.color-card span{color:var(--muted);font-size:10px}.dot{width:24px;height:24px;margin-bottom:5px;border-radius:8px}.purple{background:#7541a5}.pink{background:#e879b9}.turquoise{background:#36bdb5}.yellow{background:#f2cb45}label{display:block;margin:14px 0 6px;font-size:12px;font-weight:700}select{width:100%;padding:12px;border:1px solid #ded3e9;border-radius:10px;background:#fff;color:var(--ink);font:inherit}.observation{display:flex;align-items:center;gap:12px;margin-top:16px;padding:14px;border:1px solid var(--line);border-radius:14px;background:#fcfbfe}.swatch{width:47px;height:47px;flex:0 0 47px;border-radius:13px;background:#7541a5}.observation strong{font-size:12px}.observation p{margin:3px 0 0;color:var(--muted);font-size:11px}.caution{margin-top:15px;padding:14px;border-radius:12px;background:#fff7e5;border:1px solid #f5e6bd}.caution strong{font-size:12px;color:#74571b}.caution p{color:#705f3a}
+.process-list{display:grid;gap:12px}.process-list>div{display:flex;gap:12px;padding:14px;border:1px solid var(--line);border-radius:13px}.process-list>div>span{display:grid;place-items:center;width:29px;height:29px;flex:0 0 29px;border-radius:9px;background:var(--pale);color:var(--purple);font-weight:800}.process-list strong{font-size:13px}.process-list p{margin:4px 0 0;color:var(--muted);font-size:12px}footer{display:flex;justify-content:space-between;gap:10px;width:min(980px,calc(100% - 28px));margin:0 auto;padding:0 0 24px;color:var(--muted);font-size:11px}footer strong{color:var(--purple)}
+[hidden]{display:none!important}
+@media(max-width:680px){.hero{padding:20px 16px;gap:11px}.brand-mark{width:45px;height:45px;flex-basis:45px;border-radius:14px}.eyebrow{font-size:8px;letter-spacing:1px}.hero h1{font-size:24px}.hero-sub{font-size:11px}.intro{padding:18px}.intro-icon{width:49px;height:49px;flex-basis:49px;border-radius:15px;font-size:30px}.intro h2{font-size:21px}.intro p{font-size:12px}.tabs{margin:12px 0;gap:4px}.tab{padding:10px 12px}.view{padding:17px}.section-title h2{font-size:18px}.scanner-card{min-height:220px}.color-options{grid-template-columns:repeat(2,minmax(0,1fr))}.color-card{display:grid;grid-template-columns:28px 1fr;align-items:center}.color-card .dot{grid-row:span 2;margin:0}.color-card span{grid-column:2}.data-grid{gap:8px}.data-cell{padding:10px}footer{flex-direction:column;gap:2px}}
+@media(max-width:350px){.intro-icon{display:none}.view{padding:13px}.data-grid{grid-template-columns:1fr}.tab{font-size:11px}}
+
+  </style>
+  <script src="https://unpkg.com/html5-qrcode" defer></script>
+  <script defer>
+document.addEventListener("DOMContentLoaded", () => {
+  const $ = (id) => document.getElementById(id);
+  let qrScanner = null;
+  let isScanning = false;
+
+  const demoFood = {
+    nombre: "Carne de res de prueba",
+    codigo: "CC-DEMO-001",
+    lote: "PRUEBA-001",
+    procedencia: "Finca demostrativa",
+    vencimiento: "2027-01-30",
+    tipoAlimento: "Carne refrigerada",
+    nutricion: {
+      sal: "Dato de ejemplo",
+      azucares: "Dato de ejemplo",
+      grasasSaturadas: "Dato de ejemplo",
+      otros: "Prototipo escolar"
+    },
+    aviso: "Datos de prueba para la demostración educativa."
+  };
+
+  function status(message, error = false) {
+    $("scan-status").textContent = message;
+    $("scan-status").classList.toggle("error", error);
+  }
+
+  function goTo(id) {
+    document.querySelectorAll(".view").forEach(v => v.classList.toggle("active", v.id === id));
+    document.querySelectorAll(".tab").forEach(b => b.classList.toggle("active", b.dataset.view === id));
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+  document.querySelectorAll("[data-view]").forEach(b => b.addEventListener("click", () => goTo(b.dataset.view)));
+  document.querySelectorAll("[data-goto]").forEach(b => b.addEventListener("click", () => goTo(b.dataset.goto)));
+
+  function value(id, text) { $(id).textContent = text || "No indicado en el QR"; }
+
+  function displayFood(data) {
+    if (typeof data === "string") {
+      try { data = JSON.parse(data); }
+      catch { status("El QR se leyó, pero su contenido no tiene el formato de datos esperado.", true); return; }
+    }
+    const n = data.nutricion || {};
+    value("food-name", data.nombre || data.producto);
+    value("food-code", "Código: " + (data.codigo || "No indicado"));
+    value("food-lot", data.lote);
+    value("food-origin", data.procedencia || data.origen);
+    value("food-expiry", data.vencimiento);
+    value("food-type", data.tipoAlimento || data.tipo);
+    value("food-salt", n.sal || n.sodio);
+    value("food-sugar", n.azucares || n.azucar);
+    value("food-fat", n.grasasSaturadas || n.grasas_saturadas);
+    value("food-note", n.otros || data.aviso);
+    $("empty-food").hidden = true;
+    $("food-data").hidden = false;
+    goTo("food");
+  }
+
+  $("demo-read").addEventListener("click", () => {
+    displayFood(demoFood);
+    status("Datos de demostración cargados. Se cargaron datos de prueba; no se ha leído un QR.");
+  });
+
+  async function stopScanner() {
+    if (qrScanner) {
+      try { if (isScanning) await qrScanner.stop(); } catch (_) {}
+      try { await qrScanner.clear(); } catch (_) {}
+    }
+    qrScanner = null;
+    isScanning = false;
+    $("start-camera").hidden = false;
+    $("stop-camera").hidden = true;
+    $("camera-placeholder").hidden = false;
+  }
+
+  $("start-camera").addEventListener("click", async () => {
+    const consent = window.confirm(
+      "Consumo Consciente necesita permiso para usar la cámara y leer el código QR. ¿Deseas permitir el acceso a la cámara? El navegador también te pedirá autorización."
+    );
+    if (!consent) {
+      status("No se activó la cámara. Puedes intentarlo cuando quieras.");
+      return;
+    }
+    if (typeof Html5Qrcode === "undefined") {
+      status("No se pudo cargar el lector QR. Conéctate a internet y vuelve a cargar la página.", true);
+      return;
+    }
+    if (!(window.isSecureContext || ["localhost", "127.0.0.1"].includes(location.hostname))) {
+      status("La cámara necesita una dirección HTTPS o localhost. No funciona al abrir el archivo directamente desde WhatsApp.", true);
+      return;
+    }
+    $("start-camera").hidden = true;
+    $("stop-camera").hidden = false;
+    $("camera-placeholder").hidden = true;
+    try {
+      qrScanner = new Html5Qrcode("reader");
+      status("Solicitando permiso de cámara…");
+      await qrScanner.start({ facingMode: "environment" }, { fps: 10, qrbox: { width: 220, height: 220 } },
+        async (decoded) => {
+          await stopScanner();
+          displayFood(decoded);
+          status("QR leído correctamente.");
+        }, () => {});
+      isScanning = true;
+      status("Cámara activa. Centra el QR dentro del recuadro.");
+    } catch (e) {
+      await stopScanner();
+      status("No se pudo activar la cámara. Revisa los permisos del navegador y usa HTTPS o localhost.", true);
+    }
+  });
+  $("stop-camera").addEventListener("click", async () => {
+    await stopScanner();
+    status("Cámara detenida.");
+  });
+
+  const colorInfo = {
+    "Morado": { hex: "#7541a5", cls: "purple", text: "Color base de referencia para el experimento." },
+    "Rosado": { hex: "#e879b9", cls: "pink", text: "Color observado en la prueba; requiere validación experimental." },
+    "Turquesa": { hex: "#36bdb5", cls: "turquoise", text: "Color observado en la prueba; requiere validación experimental." },
+    "Amarillo": { hex: "#f2cb45", cls: "yellow", text: "Color observado en la prueba; requiere validación experimental." }
+  };
+  $("record-color").addEventListener("click", () => {
+    const name = $("observed-color").value;
+    if (!name) {
+      $("observation-title").textContent = "Selecciona un color primero";
+      $("observation-text").textContent = "Elige uno de los colores de la guía y vuelve a registrar.";
+      return;
+    }
+    const c = colorInfo[name];
+    $("color-swatch").className = "swatch " + c.cls;
+    $("observation-title").textContent = "Observación registrada: " + name;
+    $("observation-text").textContent = c.text + " Esta observación solo se muestra en pantalla.";
+  });
+});
+  </script>
+</head>
+<body>
+<header class="hero">
+  <div class="brand-mark">CC</div>
+  <div><p class="eyebrow">PROYECTO ESCOLAR · CIENCIA Y ALIMENTACIÓN</p>
+    <h1>Consumo <span>Consciente</span></h1>
+    <p class="hero-sub">Información clara para decisiones mejor informadas.</p>
+  </div>
+</header>
+<main>
+  <section class="intro">
+    <div><span class="tag">PROTOTIPO INTERACTIVO</span><h2>Conoce mejor lo que consumes</h2>
+      <p>Escanea el código QR de una etiqueta de prueba para consultar los datos del alimento y registra el color observado en el indicador experimental.</p></div>
+    <div class="intro-icon" aria-hidden="true">♧</div>
+  </section>
+  <nav class="tabs" aria-label="Secciones de la aplicación">
+    <button class="tab active" data-view="scan"> <span>01</span> Escanear QR</button>
+    <button class="tab" data-view="food"><span>02</span> Datos del alimento</button>
+    <button class="tab" data-view="indicator"><span>03</span> Indicador de color</button>
+    <button class="tab" data-view="about"><span>04</span> Cómo funciona</button>
+  </nav>
+  <section id="scan" class="view active">
+    <div class="section-title"><div class="step">01</div><div><h2>Escanea la etiqueta</h2><p>Usa el QR de prueba que viene por separado con este proyecto.</p></div></div>
+    <div class="scanner-card">
+      <div id="reader"></div>
+      <div id="camera-placeholder" class="camera-placeholder"><div class="scan-frame"><span>▦</span></div><strong>El lector aparecerá aquí</strong><p>Activa la cámara y coloca el código QR dentro del recuadro.</p></div>
+    </div>
+    <div class="actions"><button id="start-camera" class="primary">Activar cámara</button><button id="stop-camera" class="secondary" hidden>Detener cámara</button></div>
+    <p id="scan-status" class="status" role="status">Cámara apagada. Puedes probar la consulta manual si no tienes cámara disponible.</p>
+    <details class="manual"><summary>¿No puedes escanear? Probar con datos de ejemplo</summary><p>Esta opción simula la lectura para presentar el prototipo sin necesitar imprimir el QR.</p><button id="demo-read" class="secondary">Cargar alimento de demostración</button></details>
+    <div class="tip"><strong>Para la presentación</strong><p>Abre el archivo QR_prueba.png por separado en otro teléfono o imprímelo. Luego escanéalo con esta aplicación.</p></div>
+  </section>
+  <section id="food" class="view">
+    <div class="section-title"><div class="step">02</div><div><h2>Información del alimento</h2><p>Los datos se muestran a partir del contenido leído en el QR.</p></div></div>
+    <div id="empty-food" class="empty-state"><div>▤</div><h3>Aún no hay un alimento consultado</h3><p>Ve a “Escanear QR” y escanea la etiqueta de prueba.</p><button class="secondary" data-goto="scan">Ir al escáner</button></div>
+    <div id="food-data" hidden>
+      <div class="food-heading"><div class="food-icon">♧</div><div><span class="tag">ETIQUETA DE PRUEBA</span><h3 id="food-name">Carne de res de prueba</h3><p id="food-code" class="muted">Código: CC-DEMO-001</p></div></div>
+      <div class="data-grid">
+        <div class="data-cell"><span>Lote</span><strong id="food-lot">—</strong></div>
+        <div class="data-cell"><span>Procedencia</span><strong id="food-origin">—</strong></div>
+        <div class="data-cell"><span>Fecha de vencimiento</span><strong id="food-expiry">—</strong></div>
+        <div class="data-cell"><span>Tipo de alimento</span><strong id="food-type">—</strong></div>
+      </div>
+      <h3 class="subhead">Información nutricional</h3>
+      <p class="muted small">En este prototipo, los valores nutricionales son demostrativos y son datos de prueba y deben verificarse antes de usarse en un producto real.</p>
+      <div class="nutrition">
+        <div><span>Sal / sodio</span><strong id="food-salt">—</strong></div>
+        <div><span>Azúcares</span><strong id="food-sugar">—</strong></div>
+        <div><span>Grasas saturadas</span><strong id="food-fat">—</strong></div>
+        <div><span>Observación</span><strong id="food-note">—</strong></div>
+      </div>
+      <button class="secondary" data-goto="indicator">Continuar al indicador</button>
+    </div>
+  </section>
+  <section id="indicator" class="view">
+    <div class="section-title"><div class="step">03</div><div><h2>Indicador de color</h2><p>Registra el color que observas en tu experimento.</p></div></div>
+    <div class="science-note"><strong>Fundamento científico</strong><p>La col morada contiene antocianinas, pigmentos naturales que pueden cambiar de color según el pH. La respuesta depende de la preparación y las condiciones de la prueba; por eso debe validarse experimentalmente.</p></div>
+    <div class="color-options">
+      <div class="color-card"><i class="dot purple"></i><strong>Morado</strong><span>Color base</span></div>
+      <div class="color-card"><i class="dot pink"></i><strong>Rosado</strong><span>Color de prueba</span></div>
+      <div class="color-card"><i class="dot turquoise"></i><strong>Turquesa</strong><span>Color de prueba</span></div>
+      <div class="color-card"><i class="dot yellow"></i><strong>Amarillo</strong><span>Color de prueba</span></div>
+    </div>
+    <label for="observed-color">Color observado</label>
+    <select id="observed-color"><option value="">Selecciona el color</option><option>Morado</option><option>Rosado</option><option>Turquesa</option><option>Amarillo</option></select>
+    <button id="record-color" class="primary">Registrar observación</button>
+    <div class="observation" aria-live="polite"><div id="color-swatch" class="swatch purple"></div><div><strong id="observation-title">Sin observación registrada</strong><p id="observation-text">Selecciona un color y registra tu observación.</p></div></div>
+    <div class="caution"><strong>Nota importante</strong><p>El color del prototipo no confirma si un alimento está fresco o es seguro para comer. No uses esta demostración para decidir si consumir carne.</p></div>
+  </section>
+  <section id="about" class="view">
+    <div class="section-title"><div class="step">04</div><div><h2>Cómo funciona</h2><p>El recorrido de la demostración.</p></div></div>
+    <div class="process-list">
+      <div><span>1</span><div><strong>Etiqueta con QR</strong><p>El QR de prueba contiene datos de prueba del alimento. Se entrega como una imagen independiente.</p></div></div>
+      <div><span>2</span><div><strong>Escaneo</strong><p>La cámara intenta leer el código. Si no funciona, se puede cargar el alimento de demostración.</p></div></div>
+      <div><span>3</span><div><strong>Consulta de datos</strong><p>La aplicación presenta lote, procedencia, vencimiento y campos nutricionales incluidos en el QR.</p></div></div>
+      <div><span>4</span><div><strong>Observación experimental</strong><p>El usuario registra el color observado en el indicador de col morada.</p></div></div>
+    </div>
+    <div class="tip"><strong>Limitaciones actuales</strong><p>Es un prototipo escolar: no usa una base de datos, no verifica etiquetas comerciales y no determina la seguridad alimentaria.</p></div>
+  </section>
+</main>
+<footer><strong>Consumo Consciente</strong><span>Prototipo educativo · Datos de prueba</span></footer>
+<script>
+/* Los controles principales están implementados en funciones/app.js */
+</script>
+</body>
+</html>

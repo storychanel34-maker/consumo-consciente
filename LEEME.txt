@@ -1,0 +1,18 @@
+CONSUMO CONSCIENTE — PROTOTIPO ESCOLAR
+
+ARCHIVOS
+- index.html + estilos/style.css + funciones/app.js: proyecto organizado para VS Code.
+- QR_prueba.png: etiqueta QR independiente con datos de prueba.
+- ConsumoConsciente_Celular.html (archivo aparte): versión con los estilos y el código dentro de un solo archivo.
+
+IMPORTANTE PARA QUE SE VEA CON COLOR EN CELULAR
+No abras la página desde la vista previa de WhatsApp ni desde un visor de archivos que solo muestre texto. Descarga el archivo primero y ábrelo en un navegador compatible. La versión de un solo archivo evita que se pierdan los estilos por rutas relativas.
+Para escanear con cámara, el navegador requiere HTTPS (o localhost en la computadora) y permiso de cámara. Abrir un archivo local en el celular puede mostrar el diseño, pero la cámara podría no funcionar.
+
+PRESENTACIÓN
+1. Para mostrar el diseño rápidamente, abre ConsumoConsciente_Celular.html en un navegador.
+2. Para probar el QR real, abre QR_prueba.png en otro dispositivo o imprímelo.
+3. En la app, pulsa “Activar cámara”. Si el teléfono bloquea la cámara, usa “Cargar alimento de demostración”.
+
+LIMITACIONES
+Datos de prueba; prototipo educativo sin base de datos. El color experimental no confirma la seguridad del alimento.

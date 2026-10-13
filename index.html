@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#542b7d">
+  <title>Consumo Consciente | Prototipo</title>
+  <link rel="stylesheet" href="estilos/style.css">
+  <script src="https://unpkg.com/html5-qrcode" defer></script>
+  <script src="funciones/app.js" defer></script>
+</head>
+<body>
+<header class="hero">
+  <div class="brand-mark">CC</div>
+  <div><p class="eyebrow">PROYECTO ESCOLAR · CIENCIA Y ALIMENTACIÓN</p>
+    <h1>Consumo <span>Consciente</span></h1>
+    <p class="hero-sub">Información clara para decisiones mejor informadas.</p>
+  </div>
+</header>
+<main>
+  <section class="intro">
+    <div><span class="tag">PROTOTIPO INTERACTIVO</span><h2>Conoce mejor lo que consumes</h2>
+      <p>Escanea el código QR de una etiqueta de prueba para consultar los datos del alimento y registra el color observado en el indicador experimental.</p></div>
+    <div class="intro-icon" aria-hidden="true">♧</div>
+  </section>
+  <nav class="tabs" aria-label="Secciones de la aplicación">
+    <button class="tab active" data-view="scan"> <span>01</span> Escanear QR</button>
+    <button class="tab" data-view="food"><span>02</span> Datos del alimento</button>
+    <button class="tab" data-view="indicator"><span>03</span> Indicador de color</button>
+    <button class="tab" data-view="about"><span>04</span> Cómo funciona</button>
+  </nav>
+  <section id="scan" class="view active">
+    <div class="section-title"><div class="step">01</div><div><h2>Escanea la etiqueta</h2><p>Usa el QR de prueba que viene por separado con este proyecto.</p></div></div>
+    <div class="scanner-card">
+      <div id="reader"></div>
+      <div id="camera-placeholder" class="camera-placeholder"><div class="scan-frame"><span>▦</span></div><strong>El lector aparecerá aquí</strong><p>Activa la cámara y coloca el código QR dentro del recuadro.</p></div>
+    </div>
+    <div class="actions"><button id="start-camera" class="primary">Activar cámara</button><button id="stop-camera" class="secondary" hidden>Detener cámara</button></div>
+    <p id="scan-status" class="status" role="status">Cámara apagada. Puedes probar la consulta manual si no tienes cámara disponible.</p>
+    <details class="manual"><summary>¿No puedes escanear? Probar con datos de ejemplo</summary><p>Esta opción simula la lectura para presentar el prototipo sin necesitar imprimir el QR.</p><button id="demo-read" class="secondary">Cargar alimento de demostración</button></details>
+    <div class="tip"><strong>Para la presentación</strong><p>Abre el archivo QR_prueba.png por separado en otro teléfono o imprímelo. Luego escanéalo con esta aplicación.</p></div>
+  </section>
+  <section id="food" class="view">
+    <div class="section-title"><div class="step">02</div><div><h2>Información del alimento</h2><p>Los datos se muestran a partir del contenido leído en el QR.</p></div></div>
+    <div id="empty-food" class="empty-state"><div>▤</div><h3>Aún no hay un alimento consultado</h3><p>Ve a “Escanear QR” y escanea la etiqueta de prueba.</p><button class="secondary" data-goto="scan">Ir al escáner</button></div>
+    <div id="food-data" hidden>
+      <div class="food-heading"><div class="food-icon">♧</div><div><span class="tag">ETIQUETA DE PRUEBA</span><h3 id="food-name">Carne de res de prueba</h3><p id="food-code" class="muted">Código: CC-DEMO-001</p></div></div>
+      <div class="data-grid">
+        <div class="data-cell"><span>Lote</span><strong id="food-lot">—</strong></div>
+        <div class="data-cell"><span>Procedencia</span><strong id="food-origin">—</strong></div>
+        <div class="data-cell"><span>Fecha de vencimiento</span><strong id="food-expiry">—</strong></div>
+        <div class="data-cell"><span>Tipo de alimento</span><strong id="food-type">—</strong></div>
+      </div>
+      <h3 class="subhead">Información nutricional</h3>
+      <p class="muted small">En este prototipo, los valores nutricionales son demostrativos y son datos de prueba y deben verificarse antes de usarse en un producto real.</p>
+      <div class="nutrition">
+        <div><span>Sal / sodio</span><strong id="food-salt">—</strong></div>
+        <div><span>Azúcares</span><strong id="food-sugar">—</strong></div>
+        <div><span>Grasas saturadas</span><strong id="food-fat">—</strong></div>
+        <div><span>Observación</span><strong id="food-note">—</strong></div>
+      </div>
+      <button class="secondary" data-goto="indicator">Continuar al indicador</button>
+    </div>
+  </section>
+  <section id="indicator" class="view">
+    <div class="section-title"><div class="step">03</div><div><h2>Indicador de color</h2><p>Registra el color que observas en tu experimento.</p></div></div>
+    <div class="science-note"><strong>Fundamento científico</strong><p>La col morada contiene antocianinas, pigmentos naturales que pueden cambiar de color según el pH. La respuesta depende de la preparación y las condiciones de la prueba; por eso debe validarse experimentalmente.</p></div>
+    <div class="color-options">
+      <div class="color-card"><i class="dot purple"></i><strong>Morado</strong><span>Color base</span></div>
+      <div class="color-card"><i class="dot pink"></i><strong>Rosado</strong><span>Color de prueba</span></div>
+      <div class="color-card"><i class="dot turquoise"></i><strong>Turquesa</strong><span>Color de prueba</span></div>
+      <div class="color-card"><i class="dot yellow"></i><strong>Amarillo</strong><span>Color de prueba</span></div>
+    </div>
+    <label for="observed-color">Color observado</label>
+    <select id="observed-color"><option value="">Selecciona el color</option><option>Morado</option><option>Rosado</option><option>Turquesa</option><option>Amarillo</option></select>
+    <button id="record-color" class="primary">Registrar observación</button>
+    <div class="observation" aria-live="polite"><div id="color-swatch" class="swatch purple"></div><div><strong id="observation-title">Sin observación registrada</strong><p id="observation-text">Selecciona un color y registra tu observación.</p></div></div>
+    <div class="caution"><strong>Nota importante</strong><p>El color del prototipo no confirma si un alimento está fresco o es seguro para comer. No uses esta demostración para decidir si consumir carne.</p></div>
+  </section>
+  <section id="about" class="view">
+    <div class="section-title"><div class="step">04</div><div><h2>Cómo funciona</h2><p>El recorrido de la demostración.</p></div></div>
+    <div class="process-list">
+      <div><span>1</span><div><strong>Etiqueta con QR</strong><p>El QR de prueba contiene datos de prueba del alimento. Se entrega como una imagen independiente.</p></div></div>
+      <div><span>2</span><div><strong>Escaneo</strong><p>La cámara intenta leer el código. Si no funciona, se puede cargar el alimento de demostración.</p></div></div>
+      <div><span>3</span><div><strong>Consulta de datos</strong><p>La aplicación presenta lote, procedencia, vencimiento y campos nutricionales incluidos en el QR.</p></div></div>
+      <div><span>4</span><div><strong>Observación experimental</strong><p>El usuario registra el color observado en el indicador de col morada.</p></div></div>
+    </div>
+    <div class="tip"><strong>Limitaciones actuales</strong><p>Es un prototipo escolar: no usa una base de datos, no verifica etiquetas comerciales y no determina la seguridad alimentaria.</p></div>
+  </section>
+</main>
+<footer><strong>Consumo Consciente</strong><span>Prototipo educativo · Datos de prueba</span></footer>
+<script>
+/* Los controles principales están implementados en funciones/app.js */
+</script>
+</body>
+</html>
